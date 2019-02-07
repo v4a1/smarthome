@@ -1,4 +1,4 @@
-cd prfrom tkinter import *
+from tkinter import *
 from datetime import datetime, date, time
 
 class MainWindow:
