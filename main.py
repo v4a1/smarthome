@@ -33,21 +33,29 @@ class MainWindow:
         self.date['text']=dt.strftime("%H:%M:%S %d %B %Y")
     
     def add_meters(self):
-        self.meters_frame = Frame()
-        self.meters_frame.pack()
-        self.addmeter = Button(self.meters_frame, text='Настройка счетчиков', command=self.meterconfig)
+        self.meters_frame = []
+        for i in range(2):
+            x = Frame()
+            self.meters_frame.append(x)
+            self.meters_frame[i].pack()
+        self.addmeter = Button(text='Настройка счетчиков', command=self.meterconfig)
         self.addmeter.pack()
         self.meters = [{'activ':1,'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'title': 'Холодная вода', 'indication':'00000001', 'last_indication':'00000001', 'last_pay_date':'1.02.2019', 'cost':'15'}, {'activ':1,'title': 'Горячая вода', 'indication':'000135481', 'last_indication':'000134856', 'last_pay_date':'1.02.2019', 'cost':'15'}]
         x = 0
         for i in self.meters:
-            self.i = Meter(self.meters_frame, i, x+1)
+            print(x)
+            if x < 4:
+                self.i = Meter(self.meters_frame[0], i)
+            else:
+                self.i = Meter(self.meters_frame[1], i)
+            x += 1
 
 
     def meterconfig(self):
         MeterConfig(self)
 
 class Meter(Frame):
-    def __init__(self, master, date, index):
+    def __init__(self, master, date):
         Frame.__init__(self, master)
         self.pack(side=LEFT)
         self['width'] = 200
